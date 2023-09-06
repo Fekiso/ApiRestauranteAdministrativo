@@ -3,8 +3,6 @@ interface AuxiliarInterface {
   nombre: string;
   descripcion: string;
   habilitado: boolean;
-  fecha_creacion: string;
-  fecha_update: string;
 }
 
 export interface TipoComidaInterface extends AuxiliarInterface {}

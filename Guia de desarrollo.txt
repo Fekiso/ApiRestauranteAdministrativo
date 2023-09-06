@@ -1,0 +1,1 @@
+Si se agrega una nueva tabla, agregar primero la interfaz. luego el modelo para sequelize y despues swagger, luego vamos a hacer los servicios y controladores que consumen, al ultimo agregamos las rutas, primero el archivo .ts y despues en el mismo incluimos las rutas de swagger

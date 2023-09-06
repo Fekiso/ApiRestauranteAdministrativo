@@ -1,92 +1,117 @@
-import { Request, Response } from "express";
-import { ComidaId, ComidaInsUpd } from "../interfaces/comida";
+import { Op } from "sequelize";
+import { ComidaInterface } from "../interfaces/comida";
 import Comida from "../models/comida";
-import sequelize from "../config/mysql";
-import { QueryTypes } from "sequelize";
 
-//@ts-ignore
-const obtenerComidas = async (comida: ComidaInsUpd): Promise<Comida[]> => {
+// Obtener todas las comidas
+const obtenerComidas = async (): Promise<ComidaInterface[]> => {
   try {
-    const comidas: Comida[] = await sequelize.query<Comida>("CALL spComidaSel(?, ?, ?, ?, ?, ?)", {
-      replacements: [
-        comida.id,
-        comida.nombre,
-        comida.descripcion,
-        comida.tipo,
-        comida.precio,
-        comida.habilitado,
-      ],
-      type: QueryTypes.SELECT, // Indicar que es una consulta SELECT
-    });
+    const comidas: ComidaInterface[] = await Comida.findAll();
     return comidas;
   } catch (error) {
     throw new Error("Error al obtener comidas");
   }
 };
 
-const insertarComida = async (comida: ComidaInsUpd) => {
+// Obtener una comida por su ID
+const obtenerComidaPorId = async (comidaId: number): Promise<ComidaInterface | null> => {
   try {
-    await sequelize.query("CALL spComidaIns(?, ?, ?, ?, ?)", {
-      replacements: [comida.nombre, comida.descripcion, comida.tipo, comida.precio, null],
-      type: QueryTypes.INSERT,
-    });
-
-    return true; // 201 Created
+    const comida: ComidaInterface | null = await Comida.findByPk(comidaId);
+    return comida;
   } catch (error) {
-    return error;
+    throw new Error("Error al obtener la comida por ID");
   }
 };
 
-const actualizarComida = async (comida: ComidaInsUpd) => {
+// Obtener comidas con filtros
+const obtenerComidasConFiltros = async (
+  tipo: number | null,
+  habilitado: boolean | null,
+  nombre: string | null
+): Promise<ComidaInterface[]> => {
   try {
-    await sequelize.query("CALL spComidaUpd(?, ?, ?, ?, ?, ?)", {
-      replacements: [
-        comida.id,
-        comida.nombre,
-        comida.descripcion,
-        comida.tipo,
-        comida.precio,
-        comida.habilitado,
-      ],
-      type: QueryTypes.UPDATE,
+    // Construye la condición de búsqueda basada en los filtros proporcionados
+    const condiciones: any = {};
+    if (tipo !== null && tipo) {
+      condiciones.tipo = tipo;
+    }
+    if (habilitado !== null && habilitado) {
+      condiciones.habilitado = habilitado;
+    }
+    if (nombre !== null && nombre) {
+      condiciones.nombre = { [Op.like]: `%${nombre}%` };
+    }
+
+    const comidas: ComidaInterface[] = await Comida.findAll({
+      where: condiciones,
     });
 
-    return true; // 201 Created
+    return comidas;
   } catch (error) {
-    return error;
+    throw new Error("Error al obtener comidas con filtros");
   }
 };
 
-const habilitarDeshabilitarComida = async (comida: ComidaInsUpd) => {
+// Crear una nueva comida
+const crearComida = async (nuevaComida: ComidaInterface): Promise<ComidaInterface> => {
   try {
-    await sequelize.query("CALL spComidaHabilitarDeshabilitar(?, ?)", {
-      replacements: [comida.id, comida.habilitado],
-      type: QueryTypes.UPDATE,
-    });
-
-    return true; // 201 Created
+    const comidaCreada: ComidaInterface = await Comida.create(nuevaComida);
+    return comidaCreada;
   } catch (error) {
-    return error;
+    throw new Error("Error al crear la comida");
   }
 };
 
-const borrarComida = async (comida: ComidaId) => {
+// Actualizar una comida por su ID
+const actualizarComida = async (
+  comidaId: number,
+  datosActualizados: ComidaInterface
+): Promise<number> => {
   try {
-    await sequelize.query("CALL spComidaDel(?, ?, ?, ?, ?)", {
-      replacements: [comida.id],
-      type: QueryTypes.DELETE,
+    const resultado: [number] = await Comida.update(datosActualizados, {
+      where: { id: comidaId },
     });
-
-    return true; // 201 Created
+    return resultado[0];
   } catch (error) {
-    return error;
+    throw new Error("Error al actualizar la comida");
+  }
+};
+
+// habilito una comida por su ID
+const habilitarDeshabilitarComida = async (
+  comidaId: number,
+  habilitado: boolean
+): Promise<number> => {
+  try {
+    const resultado: [number] = await Comida.update(
+      { habilitado: habilitado },
+      {
+        where: { id: comidaId },
+      }
+    );
+    return resultado[0];
+  } catch (error) {
+    throw new Error("Error al actualizar la comida");
+  }
+};
+
+// Eliminar una comida por su ID
+const eliminarComida = async (comidaId: number): Promise<number> => {
+  try {
+    const resultado: number = await Comida.destroy({
+      where: { id: comidaId },
+    });
+    return resultado;
+  } catch (error) {
+    throw new Error("Error al eliminar la comida");
   }
 };
 
 export {
   obtenerComidas,
-  insertarComida,
+  obtenerComidaPorId,
+  obtenerComidasConFiltros,
+  crearComida,
   actualizarComida,
   habilitarDeshabilitarComida,
-  borrarComida,
+  eliminarComida,
 };

@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/mysql"; // Importa la conexión a la base de datos
 import { BebidaInterface } from "../interfaces/bebida";
+import TipoBebida from "./tipoBebida";
 
 class Bebida extends Model<BebidaInterface> implements Bebida {
   id!: number;
@@ -9,8 +10,6 @@ class Bebida extends Model<BebidaInterface> implements Bebida {
   tipo!: number;
   precio!: number;
   habilitado!: boolean;
-  fecha_creacion!: string;
-  fecha_update!: string;
 }
 
 Bebida.init(
@@ -18,8 +17,7 @@ Bebida.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrementIdentity: true,
-      allowNull: false,
+      autoIncrement: true,
     },
     nombre: {
       type: DataTypes.STRING,
@@ -27,14 +25,18 @@ Bebida.init(
     },
     descripcion: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     tipo: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.TINYINT({ length: 1 }),
       allowNull: false,
+      references: {
+        model: TipoBebida,
+        key: "id",
+      },
     },
     precio: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
     habilitado: {
@@ -42,20 +44,14 @@ Bebida.init(
       allowNull: false,
       defaultValue: 1,
     },
-    fecha_creacion: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    fecha_update: {
-      type: DataTypes.DATEONLY,
-      allowNull: true,
-    },
   },
   {
     sequelize,
     modelName: "Bebida",
     tableName: "bebidas", // Nombre de la tabla en la base de datos
-    timestamps: false, // Deshabilita los campos de fecha de creación y actualización automáticos
+    timestamps: true,
+    createdAt: "fecha_creacion",
+    updatedAt: "fecha_actualizacion",
   }
 );
 

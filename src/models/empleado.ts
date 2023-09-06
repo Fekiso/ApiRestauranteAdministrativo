@@ -1,6 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/mysql"; // Importa la conexión a la base de datos
 import { EmpleadoInterface } from "../interfaces/empleado";
+import TipoDocumento from "./tipoDocumento";
+import TipoRol from "./tipoRol";
 
 class Empleado extends Model<EmpleadoInterface> implements Empleado {
   id!: number;
@@ -14,8 +16,6 @@ class Empleado extends Model<EmpleadoInterface> implements Empleado {
   telefono!: string;
   email!: string;
   habilitado!: boolean;
-  fecha_creacion!: string;
-  fecha_update!: string;
 }
 
 Empleado.init(
@@ -23,8 +23,7 @@ Empleado.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrementIdentity: true,
-      allowNull: false,
+      autoIncrement: true,
     },
     user: {
       type: DataTypes.STRING,
@@ -44,18 +43,25 @@ Empleado.init(
       allowNull: false,
     },
     tipoDocumento: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.TINYINT({ length: 1 }),
       allowNull: false,
-      defaultValue: 1,
+      references: {
+        model: TipoDocumento,
+        key: "id",
+      },
     },
     nroDocumento: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.DECIMAL(9, 0),
       unique: true,
       allowNull: false,
     },
     rol: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.TINYINT({ length: 1 }),
       allowNull: false,
+      references: {
+        model: TipoRol,
+        key: "id",
+      },
     },
     telefono: {
       type: DataTypes.STRING,
@@ -70,20 +76,15 @@ Empleado.init(
       allowNull: false,
       defaultValue: 1,
     },
-    fecha_creacion: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    fecha_update: {
-      type: DataTypes.DATEONLY,
-      allowNull: true,
-    },
   },
   {
     sequelize,
     modelName: "Empleado",
-    tableName: "empleado", // Nombre de la tabla en la base de datos
-    timestamps: false, // Deshabilita los campos de fecha de creación y actualización automáticos
+    tableName: "empleados", // Nombre de la tabla en la base de datos
+    timestamps: true,
+    createdAt: "fecha_creacion",
+    updatedAt: "fecha_actualizacion",
+    omitNull: true, // Evita que se inserten valores nulos en las columnas omitidas
   }
 );
 

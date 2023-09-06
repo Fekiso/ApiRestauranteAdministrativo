@@ -7,17 +7,14 @@ class TipoComida extends Model<TipoComidaInterface> implements TipoComida {
   nombre!: string;
   descripcion!: string;
   habilitado!: boolean;
-  fecha_creacion!: string;
-  fecha_update!: string;
 }
 
 TipoComida.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.TINYINT({ length: 1 }),
       primaryKey: true,
-      autoIncrementIdentity: true,
-      allowNull: false,
+      autoIncrement: true,
     },
     nombre: {
       type: DataTypes.STRING,
@@ -25,27 +22,21 @@ TipoComida.init(
     },
     descripcion: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     habilitado: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: 1,
     },
-    fecha_creacion: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    fecha_update: {
-      type: DataTypes.DATEONLY,
-      allowNull: true,
-    },
   },
   {
     sequelize,
     modelName: "TipoComida",
     tableName: "tipos_comida", // Nombre de la tabla en la base de datos
-    timestamps: false, // Deshabilita los campos de fecha de creación y actualización automáticos
+    timestamps: true,
+    createdAt: "fecha_creacion",
+    updatedAt: "fecha_actualizacion",
   }
 );
 

@@ -1,24 +1,30 @@
 import { Request, Response } from "express";
-import { handleHttp } from "../utils/error";
+import { handleHttp } from "../utils/error.handle";
 import { loginUsuario, registrarNuevoUsuario } from "../services/auth";
+import { AuthType, EmpleadoInterface } from "../interfaces/empleado.js";
 
 const postRegistrar = async (req: Request, res: Response) => {
   try {
     const { body } = req;
-    const responseUser = await registrarNuevoUsuario(body);
-    res.sendStatus(201);
+    let NuevoEmpleado: EmpleadoInterface = { ...body };
+    const responseUser = await registrarNuevoUsuario(NuevoEmpleado);
+    console.log(responseUser);
+    res.status(201).json(responseUser);
   } catch (e) {
-    handleHttp(res, "Error_postComida");
+    //@ts-ignore
+    handleHttp(res, e);
   }
 };
 
 const postLogin = async (req: Request, res: Response) => {
   try {
     const { body } = req;
-    const responseUser = await loginUsuario(body);
-    res.sendStatus(201);
+    let nuevoLogin: AuthType = { ...body };
+    const responseUser = await loginUsuario(nuevoLogin);
+    res.status(204).send(responseUser);
   } catch (e) {
-    handleHttp(res, "Error_postComida");
+    console.log(e);
+    handleHttp(res, "Error_postLogin");
   }
 };
 

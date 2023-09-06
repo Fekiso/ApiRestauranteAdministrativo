@@ -10,8 +10,6 @@ export interface EmpleadoInterface {
   telefono: string;
   email: string;
   habilitado: boolean;
-  fecha_creacion: string;
-  fecha_update: string;
 }
 
-export type AuthInterface = Pick<EmpleadoInterface, "user" | "pass">;
+export type AuthType = Pick<EmpleadoInterface, "user" | "pass">;
