@@ -12,4 +12,4 @@ export interface EmpleadoInterface {
   habilitado: boolean;
 }
 
-export type AuthType = Pick<EmpleadoInterface, "user" | "pass">;
+export type AuthType = Pick<EmpleadoInterface, "user" | "pass" | "rol">;

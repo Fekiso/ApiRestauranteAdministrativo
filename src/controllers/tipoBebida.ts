@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { TipoBebidaInterface } from "../interfaces/auxiliares";
 import {
@@ -8,8 +8,9 @@ import {
   obtenerTipoBebidaConFiltro,
   obtenerTodosLosTiposBebida,
 } from "../services/tipoBebida";
+import { RequestExt } from "../interfaces/request";
 
-const getTipoBebidas = async (req: Request, res: Response) => {
+const getTipoBebidas = async (req: RequestExt, res: Response) => {
   try {
     const tipoBebidas: TipoBebidaInterface[] = await obtenerTodosLosTiposBebida();
     res.status(200).json(tipoBebidas);
@@ -18,7 +19,7 @@ const getTipoBebidas = async (req: Request, res: Response) => {
   }
 };
 
-const getTipoBebidasFiltradas = async (req: Request, res: Response) => {
+const getTipoBebidasFiltradas = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const { tipo, habilitado } = body;
@@ -29,7 +30,7 @@ const getTipoBebidasFiltradas = async (req: Request, res: Response) => {
   }
 };
 
-const postTipoBebida = async (req: Request, res: Response) => {
+const postTipoBebida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const nuevaTipoBebida: TipoBebidaInterface = body;
@@ -40,7 +41,7 @@ const postTipoBebida = async (req: Request, res: Response) => {
   }
 };
 
-const putTipoBebida = async (req: Request, res: Response) => {
+const putTipoBebida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const tipoBebidaId: number = body.id;
@@ -52,7 +53,7 @@ const putTipoBebida = async (req: Request, res: Response) => {
   }
 };
 
-const deleteTipoBebida = async (req: Request, res: Response) => {
+const deleteTipoBebida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const tipoBebidaId: number = body.id;

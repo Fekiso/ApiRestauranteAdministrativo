@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { TipoComidaInterface } from "../interfaces/auxiliares";
 import {
@@ -8,8 +8,9 @@ import {
   obtenerTipoComidaConFiltro,
   obtenerTodosLosTiposComida,
 } from "../services/tipoComida";
+import { RequestExt } from "../interfaces/request";
 
-const getTipoComidas = async (req: Request, res: Response) => {
+const getTipoComidas = async (req: RequestExt, res: Response) => {
   try {
     const tipoComidas: TipoComidaInterface[] = await obtenerTodosLosTiposComida();
     res.status(200).json(tipoComidas);
@@ -18,7 +19,7 @@ const getTipoComidas = async (req: Request, res: Response) => {
   }
 };
 
-const getTipoComidasFiltradas = async (req: Request, res: Response) => {
+const getTipoComidasFiltradas = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const { tipo, habilitado } = body;
@@ -29,7 +30,7 @@ const getTipoComidasFiltradas = async (req: Request, res: Response) => {
   }
 };
 
-const postTipoComida = async (req: Request, res: Response) => {
+const postTipoComida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const nuevaTipoComida: TipoComidaInterface = body;
@@ -40,7 +41,7 @@ const postTipoComida = async (req: Request, res: Response) => {
   }
 };
 
-const putTipoComida = async (req: Request, res: Response) => {
+const putTipoComida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const tipoComidaId: number = body.id;
@@ -52,7 +53,7 @@ const putTipoComida = async (req: Request, res: Response) => {
   }
 };
 
-const deleteTipoComida = async (req: Request, res: Response) => {
+const deleteTipoComida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const tipoComidaId: number = body.id;

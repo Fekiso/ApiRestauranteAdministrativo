@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { readdirSync } from "fs";
+import { controlarJWT } from "../middlewares/session";
 
 const PATH_ROUTER = `${__dirname}`;
 const router = Router();
@@ -12,9 +13,15 @@ const cleanFileName = (fileName: string) => {
 readdirSync(PATH_ROUTER).filter((filename) => {
   const cleanName = cleanFileName(filename);
   if (cleanName !== "index") {
-    import(`./${cleanName}`).then((moduleRouter) => {
-      router.use(`/${cleanName}`, moduleRouter.router);
-    });
+    if (cleanName === "tipoRol") {
+      import(`./${cleanName}`).then((moduleRouter) => {
+        router.use(`/${cleanName}`, controlarJWT, moduleRouter.router);
+      });
+    } else {
+      import(`./${cleanName}`).then((moduleRouter) => {
+        router.use(`/${cleanName}`, moduleRouter.router);
+      });
+    }
   }
 });
 

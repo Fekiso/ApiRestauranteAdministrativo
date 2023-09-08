@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { ComidaInterface } from "../interfaces/comida";
 import {
@@ -10,8 +10,9 @@ import {
   obtenerComidasConFiltros,
   habilitarDeshabilitarComida,
 } from "../services/comida";
+import { RequestExt } from "../interfaces/request";
 
-const getComidas = async (req: Request, res: Response) => {
+const getComidas = async (req: RequestExt, res: Response) => {
   try {
     const comidas: ComidaInterface[] = await obtenerComidas();
     res.status(200).json(comidas);
@@ -20,7 +21,7 @@ const getComidas = async (req: Request, res: Response) => {
   }
 };
 
-const getComidaByID = async (req: Request, res: Response) => {
+const getComidaByID = async (req: RequestExt, res: Response) => {
   try {
     const { params } = req;
     const comidaId: number = parseInt(params.id);
@@ -31,7 +32,7 @@ const getComidaByID = async (req: Request, res: Response) => {
   }
 };
 
-const getComidasFiltradas = async (req: Request, res: Response) => {
+const getComidasFiltradas = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const { tipo, habilitado, nombre } = body;
@@ -42,7 +43,7 @@ const getComidasFiltradas = async (req: Request, res: Response) => {
   }
 };
 
-const postComida = async (req: Request, res: Response) => {
+const postComida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const nuevaComida: ComidaInterface = body;
@@ -53,7 +54,7 @@ const postComida = async (req: Request, res: Response) => {
   }
 };
 
-const putComida = async (req: Request, res: Response) => {
+const putComida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const comidaId: number = body.id;
@@ -65,7 +66,7 @@ const putComida = async (req: Request, res: Response) => {
   }
 };
 
-const putHabilitarDeshabilitarComida = async (req: Request, res: Response) => {
+const putHabilitarDeshabilitarComida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const comidaId: number = body.id;
@@ -77,7 +78,7 @@ const putHabilitarDeshabilitarComida = async (req: Request, res: Response) => {
   }
 };
 
-const deleteComida = async (req: Request, res: Response) => {
+const deleteComida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const comidaId: number = body.id;

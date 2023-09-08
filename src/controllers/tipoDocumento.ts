@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { TipoDocumentoInterface } from "../interfaces/auxiliares";
 import {
@@ -8,8 +8,9 @@ import {
   obtenerTipoDocumentoConFiltro,
   obtenerTodosLosTipoDocumento,
 } from "../services/tipoDocumento";
+import { RequestExt } from "../interfaces/request";
 
-const getTipoDocumentos = async (req: Request, res: Response) => {
+const getTipoDocumentos = async (req: RequestExt, res: Response) => {
   try {
     const tipoDocumentos: TipoDocumentoInterface[] = await obtenerTodosLosTipoDocumento();
     res.status(200).json(tipoDocumentos);
@@ -18,7 +19,7 @@ const getTipoDocumentos = async (req: Request, res: Response) => {
   }
 };
 
-const getTipoDocumentosFiltradas = async (req: Request, res: Response) => {
+const getTipoDocumentosFiltradas = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const { tipo, habilitado } = body;
@@ -32,7 +33,7 @@ const getTipoDocumentosFiltradas = async (req: Request, res: Response) => {
   }
 };
 
-const postTipoDocumento = async (req: Request, res: Response) => {
+const postTipoDocumento = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const nuevaTipoDocumento: TipoDocumentoInterface = body;
@@ -43,7 +44,7 @@ const postTipoDocumento = async (req: Request, res: Response) => {
   }
 };
 
-const putTipoDocumento = async (req: Request, res: Response) => {
+const putTipoDocumento = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const tipoDocumentoId: number = body.id;
@@ -55,7 +56,7 @@ const putTipoDocumento = async (req: Request, res: Response) => {
   }
 };
 
-const deleteTipoDocumento = async (req: Request, res: Response) => {
+const deleteTipoDocumento = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const tipoDocumentoId: number = body.id;

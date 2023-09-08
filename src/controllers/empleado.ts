@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { EmpleadoInterface } from "../interfaces/empleado";
 import {
@@ -9,8 +9,9 @@ import {
   obtenerEmpleados,
   obtenerEmpleadosConFiltros,
 } from "../services/empleado";
+import { RequestExt } from "../interfaces/request";
 
-const getEmpleados = async (req: Request, res: Response) => {
+const getEmpleados = async (req: RequestExt, res: Response) => {
   try {
     const empleados: EmpleadoInterface[] = await obtenerEmpleados();
     res.status(200).json(empleados);
@@ -19,7 +20,7 @@ const getEmpleados = async (req: Request, res: Response) => {
   }
 };
 
-const getEmpleadoByID = async (req: Request, res: Response) => {
+const getEmpleadoByID = async (req: RequestExt, res: Response) => {
   try {
     const { params } = req;
     const empleadoId: number = parseInt(params.id);
@@ -30,7 +31,7 @@ const getEmpleadoByID = async (req: Request, res: Response) => {
   }
 };
 
-const getEmpleadosFiltradas = async (req: Request, res: Response) => {
+const getEmpleadosFiltradas = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const { tipo, rol, habilitado, nombre, apellido } = body;
@@ -47,7 +48,7 @@ const getEmpleadosFiltradas = async (req: Request, res: Response) => {
   }
 };
 
-const putEmpleado = async (req: Request, res: Response) => {
+const putEmpleado = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const empleadoId: number = body.id;
@@ -59,7 +60,7 @@ const putEmpleado = async (req: Request, res: Response) => {
   }
 };
 
-const putHabilitarDeshabilitarEmpleado = async (req: Request, res: Response) => {
+const putHabilitarDeshabilitarEmpleado = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const empleadoId: number = body.id;
@@ -71,7 +72,7 @@ const putHabilitarDeshabilitarEmpleado = async (req: Request, res: Response) => 
   }
 };
 
-const deleteEmpleado = async (req: Request, res: Response) => {
+const deleteEmpleado = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const empleadoId: number = body.id;

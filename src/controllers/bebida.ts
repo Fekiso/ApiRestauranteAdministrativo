@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import {
   actualizarBebida,
@@ -10,8 +10,9 @@ import {
   obtenerBebidasConFiltros,
 } from "../services/bebida";
 import { BebidaInterface } from "../interfaces/bebida";
+import { RequestExt } from "../interfaces/request";
 
-const getBebidas = async (req: Request, res: Response) => {
+const getBebidas = async (req: RequestExt, res: Response) => {
   try {
     const bebidas: BebidaInterface[] = await obtenerBebidas();
     res.status(200).json(bebidas);
@@ -20,7 +21,7 @@ const getBebidas = async (req: Request, res: Response) => {
   }
 };
 
-const getBebidaByID = async (req: Request, res: Response) => {
+const getBebidaByID = async (req: RequestExt, res: Response) => {
   try {
     const { params } = req;
     const bebidaId: number = parseInt(params.id);
@@ -31,7 +32,7 @@ const getBebidaByID = async (req: Request, res: Response) => {
   }
 };
 
-const getBebidasFiltradas = async (req: Request, res: Response) => {
+const getBebidasFiltradas = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const { tipo, habilitado, nombre } = body;
@@ -42,7 +43,7 @@ const getBebidasFiltradas = async (req: Request, res: Response) => {
   }
 };
 
-const postBebida = async (req: Request, res: Response) => {
+const postBebida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const nuevaBebida: BebidaInterface = body;
@@ -53,7 +54,7 @@ const postBebida = async (req: Request, res: Response) => {
   }
 };
 
-const putBebida = async (req: Request, res: Response) => {
+const putBebida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const bebidaId: number = body.id;
@@ -65,7 +66,7 @@ const putBebida = async (req: Request, res: Response) => {
   }
 };
 
-const putHabilitarDeshabilitarBebida = async (req: Request, res: Response) => {
+const putHabilitarDeshabilitarBebida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const bebidaId: number = body.id;
@@ -77,7 +78,7 @@ const putHabilitarDeshabilitarBebida = async (req: Request, res: Response) => {
   }
 };
 
-const deleteBebida = async (req: Request, res: Response) => {
+const deleteBebida = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
     const bebidaId: number = body.id;
