@@ -1,4 +1,4 @@
-import { TipoBebidaInterface } from "../interfaces/auxiliares.interface";
+import { TipoBebidaInterface } from "../interfaces/tipo.interface";
 import TipoBebida from "../models/tipoBebida.model";
 
 // Método para obtener todos los TiposBebida

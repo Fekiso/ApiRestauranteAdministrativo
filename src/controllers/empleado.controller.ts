@@ -34,9 +34,8 @@ const getEmpleadoByID = async (req: RequestExt, res: Response) => {
 const getEmpleadosFiltradas = async (req: RequestExt, res: Response) => {
   try {
     const { body } = req;
-    const { tipo, rol, habilitado, nombre, apellido } = body;
+    const { rol, habilitado, nombre, apellido } = body;
     const empleados: EmpleadoInterface[] = await obtenerEmpleadosConFiltros(
-      tipo,
       rol,
       habilitado,
       nombre,

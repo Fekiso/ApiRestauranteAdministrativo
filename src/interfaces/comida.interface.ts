@@ -1,4 +1,4 @@
-import { TipoComidaInterface } from "./auxiliares.interface";
+import { TipoComidaInterface } from "./tipo.interface";
 
 export interface ComidaInterface {
   id: number;

@@ -1,4 +1,4 @@
-import { TipoRolInterface } from "../interfaces/auxiliares.interface";
+import { TipoRolInterface } from "../interfaces/tipo.interface";
 import TipoRol from "../models/tipoRol.model";
 
 // Método para crear un nuevo TipoRol

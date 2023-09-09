@@ -1,4 +1,4 @@
-import { TipoBebidaInterface } from "./auxiliares.interface";
+import { TipoBebidaInterface } from "./tipo.interface";
 
 export interface BebidaInterface {
   id: number;

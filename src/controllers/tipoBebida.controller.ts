@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { TipoBebidaInterface } from "../interfaces/auxiliares.interface";
+import { TipoBebidaInterface } from "../interfaces/tipo.interface";
 import {
   actualizarTipoBebida,
   crearTipoBebida,

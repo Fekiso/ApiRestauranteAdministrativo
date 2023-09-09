@@ -1,4 +1,4 @@
-import { TipoComidaInterface } from "../interfaces/auxiliares.interface";
+import { TipoComidaInterface } from "../interfaces/tipo.interface";
 import TipoComida from "../models/tipoComida.model";
 
 // Método para crear un nuevo TipoComida

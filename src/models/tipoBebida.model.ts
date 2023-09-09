@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/mysql.config";
-import { TipoBebidaInterface } from "../interfaces/auxiliares.interface";
+import { TipoBebidaInterface } from "../interfaces/tipo.interface";
 
 class TipoBebida extends Model<TipoBebidaInterface> implements TipoBebida {
   id!: number;

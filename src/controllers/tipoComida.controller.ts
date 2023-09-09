@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { TipoComidaInterface } from "../interfaces/auxiliares.interface";
+import { TipoComidaInterface } from "../interfaces/tipo.interface";
 import {
   actualizarTipoComida,
   crearTipoComida,

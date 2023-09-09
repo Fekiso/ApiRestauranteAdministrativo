@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/mysql.config";
-import { TipoRolInterface } from "../interfaces/auxiliares.interface";
+import { TipoRolInterface } from "../interfaces/tipo.interface";
 
 class TipoRol extends Model<TipoRolInterface> implements TipoRol {
   id!: number;

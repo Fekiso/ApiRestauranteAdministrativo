@@ -1,4 +1,4 @@
-import { TipoDocumentoInterface } from "../interfaces/auxiliares.interface";
+import { TipoDocumentoInterface } from "../interfaces/tipo.interface";
 import TipoDocumento from "../models/tipoDocumento.model";
 
 // Método para crear un nuevo TipoDocumento

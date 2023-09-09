@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { TipoDocumentoInterface } from "../interfaces/auxiliares.interface";
+import { TipoDocumentoInterface } from "../interfaces/tipo.interface";
 import {
   actualizarTipoDocumento,
   crearTipoDocumento,

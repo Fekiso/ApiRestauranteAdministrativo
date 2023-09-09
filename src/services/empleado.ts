@@ -25,7 +25,6 @@ const obtenerEmpleadoPorId = async (empleadoId: number): Promise<EmpleadoInterfa
 };
 
 const obtenerEmpleadosConFiltros = async (
-  tipo: number | null,
   rol: number | null,
   habilitado: boolean | null,
   nombre: string | null,
@@ -35,9 +34,6 @@ const obtenerEmpleadosConFiltros = async (
     const condiciones: any = {};
     if (rol !== null && rol) {
       condiciones.rol = rol;
-    }
-    if (tipo !== null && tipo) {
-      condiciones.tipo = tipo;
     }
     if (habilitado !== null && habilitado) {
       condiciones.habilitado = habilitado;
