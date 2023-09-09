@@ -1,14 +1,12 @@
-import { TipoDocumentoInterface } from "../interfaces/auxiliares";
-import TipoDocumento from "../models/tipoDocumento";
+import { TipoDocumentoInterface } from "../interfaces/auxiliares.interface";
+import TipoDocumento from "../models/tipoDocumento.model";
 
 // Método para crear un nuevo TipoDocumento
 const crearTipoDocumento = async (nuevoTipoDocumento: TipoDocumentoInterface) => {
   try {
     const tipoDocumentoCreado = await TipoDocumento.create(nuevoTipoDocumento);
-    console.log(tipoDocumentoCreado);
     return tipoDocumentoCreado;
   } catch (error) {
-    console.log(error);
     throw new Error("Error al crear el TipoDocumento");
   }
 };
@@ -26,7 +24,6 @@ const obtenerTodosLosTipoDocumento = async () => {
 // Metodo para obtener TipoDocumento filtrados
 const obtenerTipoDocumentoConFiltro = async (tipoDocumentoId?: number, habilitado?: boolean) => {
   try {
-    // Construye un objeto de opciones de filtro basado en los parámetros proporcionados
     const opcionesDeFiltro: any = {};
 
     if (tipoDocumentoId !== undefined) {

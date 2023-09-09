@@ -1,6 +1,8 @@
 import { Op } from "sequelize";
-import { EmpleadoInterface } from "../interfaces/empleado";
-import Empleado from "../models/empleado";
+import { EmpleadoInterface } from "../interfaces/empleado.interface";
+import Empleado from "../models/empleado.model";
+import TipoDocumento from "../models/tipoDocumento.model";
+import TipoRol from "../models/tipoRol.model";
 
 // Obtener todas las empleados
 const obtenerEmpleados = async (): Promise<EmpleadoInterface[]> => {
@@ -22,7 +24,6 @@ const obtenerEmpleadoPorId = async (empleadoId: number): Promise<EmpleadoInterfa
   }
 };
 
-// Obtener empleados con filtros
 const obtenerEmpleadosConFiltros = async (
   tipo: number | null,
   rol: number | null,
@@ -31,7 +32,6 @@ const obtenerEmpleadosConFiltros = async (
   apellido: string | null
 ): Promise<EmpleadoInterface[]> => {
   try {
-    // Construye la condición de búsqueda basada en los filtros proporcionados
     const condiciones: any = {};
     if (rol !== null && rol) {
       condiciones.rol = rol;
@@ -51,11 +51,22 @@ const obtenerEmpleadosConFiltros = async (
 
     const empleados: EmpleadoInterface[] = await Empleado.findAll({
       where: condiciones,
+      include: [
+        {
+          model: TipoDocumento,
+          as: "tipoDocumento",
+          attributes: ["nombre", "habilitado"],
+        },
+        {
+          model: TipoRol,
+          as: "rolEmpleado",
+          attributes: ["nombre", "habilitado"],
+        },
+      ],
     });
 
     return empleados;
   } catch (error) {
-    console.log(error);
     throw new Error("Error al obtener empleados con filtros");
   }
 };

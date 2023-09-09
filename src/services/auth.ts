@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
-import { AuthType, EmpleadoInterface } from "../interfaces/empleado";
-import Empleado from "../models/empleado";
+import { AuthType, EmpleadoInterface } from "../interfaces/empleado.interface";
+import Empleado from "../models/empleado.model";
 import { encriptar, verificar } from "../utils/bcrypt.handle";
 import { generateToken } from "../utils/jwt.handle";
 

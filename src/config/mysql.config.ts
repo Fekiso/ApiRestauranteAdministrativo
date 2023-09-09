@@ -6,7 +6,7 @@ const user: string = process.env.DB_USER || "";
 const pass: string = process.env.DB_PASS || "";
 const host: string = process.env.DB_HOST || "";
 //@ts-ignore
-const puerto: number = process.env.DB_PORT || 0;
+const puerto: number = +process.env.DB_PORT || 0;
 
 const sequelize = new Sequelize(database, user, pass, {
   host: host,

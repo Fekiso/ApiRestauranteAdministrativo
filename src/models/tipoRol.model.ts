@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/mysql"; // Importa la conexión a la base de datos
-import { TipoRolInterface } from "../interfaces/auxiliares";
+import sequelize from "../config/mysql.config";
+import { TipoRolInterface } from "../interfaces/auxiliares.interface";
 
 class TipoRol extends Model<TipoRolInterface> implements TipoRol {
   id!: number;
@@ -33,7 +33,7 @@ TipoRol.init(
   {
     sequelize,
     modelName: "TipoRol",
-    tableName: "tipos_rol", // Nombre de la tabla en la base de datos
+    tableName: "tipos_rol",
     timestamps: true,
     createdAt: "fecha_creacion",
     updatedAt: "fecha_actualizacion",

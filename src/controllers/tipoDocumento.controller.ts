@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { TipoDocumentoInterface } from "../interfaces/auxiliares";
+import { TipoDocumentoInterface } from "../interfaces/auxiliares.interface";
 import {
   actualizarTipoDocumento,
   crearTipoDocumento,
@@ -8,7 +8,7 @@ import {
   obtenerTipoDocumentoConFiltro,
   obtenerTodosLosTipoDocumento,
 } from "../services/tipoDocumento";
-import { RequestExt } from "../interfaces/request";
+import { RequestExt } from "../interfaces/request.interface";
 
 const getTipoDocumentos = async (req: RequestExt, res: Response) => {
   try {

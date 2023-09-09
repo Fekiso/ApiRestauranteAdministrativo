@@ -1,5 +1,5 @@
-import { TipoBebidaInterface } from "../interfaces/auxiliares";
-import TipoBebida from "../models/tipoBebida";
+import { TipoBebidaInterface } from "../interfaces/auxiliares.interface";
+import TipoBebida from "../models/tipoBebida.model";
 
 // Método para obtener todos los TiposBebida
 const obtenerTodosLosTiposBebida = async () => {
@@ -7,7 +7,6 @@ const obtenerTodosLosTiposBebida = async () => {
     const tiposBebida = await TipoBebida.findAll();
     return tiposBebida;
   } catch (error) {
-    console.log(error);
     throw new Error("Error al obtener todos los TiposBebida");
   }
 };
@@ -28,7 +27,6 @@ const obtenerTipoBebidaPorId = async (tipoBebidaId: number) => {
 // Metodo para obtener TiposBebida filtrados
 const obtenerTipoBebidaConFiltro = async (tipoBebidaId?: number, habilitado?: boolean) => {
   try {
-    // Construye un objeto de opciones de filtro basado en los parámetros proporcionados
     const opcionesDeFiltro: any = {};
 
     if (tipoBebidaId !== undefined) {
@@ -55,7 +53,6 @@ const crearTipoBebida = async (nuevoTipoBebida: TipoBebidaInterface) => {
     const tipoBebidaCreado = await TipoBebida.create(nuevoTipoBebida);
     return tipoBebidaCreado;
   } catch (error) {
-    console.log(error);
     throw new Error("Error al crear el TipoBebida");
   }
 };

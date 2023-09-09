@@ -1,5 +1,5 @@
 import { sign, verify } from "jsonwebtoken";
-import { AuthType } from "../interfaces/empleado";
+import { AuthType } from "../interfaces/empleado.interface";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 

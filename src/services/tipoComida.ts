@@ -1,5 +1,5 @@
-import { TipoComidaInterface } from "../interfaces/auxiliares";
-import TipoComida from "../models/tipoComida";
+import { TipoComidaInterface } from "../interfaces/auxiliares.interface";
+import TipoComida from "../models/tipoComida.model";
 
 // Método para crear un nuevo TipoComida
 const crearTipoComida = async (nuevoTipoComida: TipoComidaInterface) => {
@@ -37,7 +37,6 @@ const obtenerTipoComidaPorId = async (tipoComidaId: number) => {
 // Metodo para obtener TiposComida filtrados
 const obtenerTipoComidaConFiltro = async (tipoComidaId?: number, habilitado?: boolean) => {
   try {
-    // Construye un objeto de opciones de filtro basado en los parámetros proporcionados
     const opcionesDeFiltro: any = {};
 
     if (tipoComidaId !== undefined) {

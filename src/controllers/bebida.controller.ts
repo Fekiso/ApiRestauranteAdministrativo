@@ -9,8 +9,8 @@ import {
   obtenerBebidas,
   obtenerBebidasConFiltros,
 } from "../services/bebida";
-import { BebidaInterface } from "../interfaces/bebida";
-import { RequestExt } from "../interfaces/request";
+import { BebidaInterface } from "../interfaces/bebida.interface";
+import { RequestExt } from "../interfaces/request.interface";
 
 const getBebidas = async (req: RequestExt, res: Response) => {
   try {

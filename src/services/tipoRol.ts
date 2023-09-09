@@ -1,5 +1,5 @@
-import { TipoRolInterface } from "../interfaces/auxiliares";
-import TipoRol from "../models/tipoRol";
+import { TipoRolInterface } from "../interfaces/auxiliares.interface";
+import TipoRol from "../models/tipoRol.model";
 
 // Método para crear un nuevo TipoRol
 const crearTipoRol = async (nuevoTipoRol: TipoRolInterface) => {
@@ -24,7 +24,6 @@ const obtenerTodosLosTiposRol = async () => {
 // Metodo para obtener TiposRol filtrados
 const obtenerTipoRolConFiltro = async (tipoRolId?: number, habilitado?: boolean) => {
   try {
-    // Construye un objeto de opciones de filtro basado en los parámetros proporcionados
     const opcionesDeFiltro: any = {};
 
     if (tipoRolId !== undefined) {

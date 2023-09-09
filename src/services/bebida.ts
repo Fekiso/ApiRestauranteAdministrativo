@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
-import { BebidaInterface } from "../interfaces/bebida";
-import Bebida from "../models/bebida";
+import { BebidaInterface } from "../interfaces/bebida.interface";
+import Bebida from "../models/bebida.model";
+import TipoBebida from "../models/tipoBebida.model";
 
 // Obtener todas las bebidas
 const obtenerBebidas = async (): Promise<BebidaInterface[]> => {
@@ -29,7 +30,6 @@ const obtenerBebidasConFiltros = async (
   nombre: string | null
 ): Promise<BebidaInterface[]> => {
   try {
-    // Construye la condición de búsqueda basada en los filtros proporcionados
     const condiciones: any = {};
     if (tipo !== null && tipo) {
       condiciones.tipo = tipo;
@@ -43,6 +43,13 @@ const obtenerBebidasConFiltros = async (
 
     const bebidas: BebidaInterface[] = await Bebida.findAll({
       where: condiciones,
+      include: [
+        {
+          model: TipoBebida,
+          as: "tipoBebida",
+          attributes: ["nombre", "habilitado"],
+        },
+      ],
     });
 
     return bebidas;

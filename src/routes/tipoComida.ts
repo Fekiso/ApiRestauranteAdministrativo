@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { logMiddelware } from "../middlewares/log";
+
 import {
   deleteTipoComida,
   getTipoComidasFiltradas,
   postTipoComida,
   putTipoComida,
-} from "../controllers/tipoComida";
+} from "../controllers/tipoComida.controller";
 
 const router = Router();
 
-router.get("/", logMiddelware, getTipoComidasFiltradas);
+router.get("/", getTipoComidasFiltradas);
 router.post("/", postTipoComida);
 router.put("/:id", putTipoComida);
 router.delete("/:id", deleteTipoComida);

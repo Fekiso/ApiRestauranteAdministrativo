@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { TipoRolInterface } from "../interfaces/auxiliares";
+import { TipoRolInterface } from "../interfaces/auxiliares.interface";
 import {
   obtenerTodosLosTiposRol,
   obtenerTipoRolConFiltro,

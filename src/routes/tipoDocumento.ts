@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { logMiddelware } from "../middlewares/log";
+
 import {
   deleteTipoDocumento,
   getTipoDocumentosFiltradas,
   postTipoDocumento,
   putTipoDocumento,
-} from "../controllers/tipoDocumento";
+} from "../controllers/tipoDocumento.controller";
 
 const router = Router();
 
-router.get("/", logMiddelware, getTipoDocumentosFiltradas);
+router.get("/", getTipoDocumentosFiltradas);
 router.post("/", postTipoDocumento);
 router.put("/:id", putTipoDocumento);
 router.delete("/:id", deleteTipoDocumento);

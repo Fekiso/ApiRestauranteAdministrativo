@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import db from "./config/mysql";
+import db from "./config/mysql.config";
 import { router } from "./routes";
-import sequelize from "./config/mysql";
+import sequelize from "./config/mysql.config";
 
 const PORT = process.env.PORT || null;
 const app = express();

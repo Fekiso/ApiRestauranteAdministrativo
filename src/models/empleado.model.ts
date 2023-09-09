@@ -1,8 +1,8 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/mysql"; // Importa la conexión a la base de datos
-import { EmpleadoInterface } from "../interfaces/empleado";
-import TipoDocumento from "./tipoDocumento";
-import TipoRol from "./tipoRol";
+import sequelize from "../config/mysql.config";
+import { EmpleadoInterface } from "../interfaces/empleado.interface";
+import TipoDocumento from "./tipoDocumento.model";
+import TipoRol from "./tipoRol.model";
 
 class Empleado extends Model<EmpleadoInterface> implements Empleado {
   id!: number;
@@ -80,12 +80,22 @@ Empleado.init(
   {
     sequelize,
     modelName: "Empleado",
-    tableName: "empleados", // Nombre de la tabla en la base de datos
+    tableName: "empleados",
     timestamps: true,
     createdAt: "fecha_creacion",
     updatedAt: "fecha_actualizacion",
-    omitNull: true, // Evita que se inserten valores nulos en las columnas omitidas
+    omitNull: true,
   }
 );
+
+Empleado.belongsTo(TipoDocumento, {
+  foreignKey: "tipoDocumento",
+  as: "documento",
+});
+
+Empleado.belongsTo(TipoRol, {
+  foreignKey: "rol",
+  as: "rolEmpleado",
+});
 
 export default Empleado;

@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { TipoBebidaInterface } from "../interfaces/auxiliares";
+import { TipoBebidaInterface } from "../interfaces/auxiliares.interface";
 import {
   actualizarTipoBebida,
   crearTipoBebida,
@@ -8,7 +8,7 @@ import {
   obtenerTipoBebidaConFiltro,
   obtenerTodosLosTiposBebida,
 } from "../services/tipoBebida";
-import { RequestExt } from "../interfaces/request";
+import { RequestExt } from "../interfaces/request.interface";
 
 const getTipoBebidas = async (req: RequestExt, res: Response) => {
   try {

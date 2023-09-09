@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { EmpleadoInterface } from "../interfaces/empleado";
+import { EmpleadoInterface } from "../interfaces/empleado.interface";
 import {
   actualizarEmpleado,
   eliminarEmpleado,
@@ -9,7 +9,7 @@ import {
   obtenerEmpleados,
   obtenerEmpleadosConFiltros,
 } from "../services/empleado";
-import { RequestExt } from "../interfaces/request";
+import { RequestExt } from "../interfaces/request.interface";
 
 const getEmpleados = async (req: RequestExt, res: Response) => {
   try {

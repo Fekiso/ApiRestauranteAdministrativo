@@ -1,3 +1,5 @@
+import { TipoBebidaInterface } from "./auxiliares.interface";
+
 export interface BebidaInterface {
   id: number;
   nombre: string;
@@ -5,6 +7,5 @@ export interface BebidaInterface {
   tipo: number;
   precio: number;
   habilitado: boolean;
+  TipoBebida?: TipoBebidaInterface;
 }
-//Omit: Crea copia y omite los campos indicados
-//Pick: Crea copia los campos seleccionado de la interfaz indicada

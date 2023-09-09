@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/mysql"; // Importa la conexión a la base de datos
-import { BebidaInterface } from "../interfaces/bebida";
-import TipoBebida from "./tipoBebida";
+import sequelize from "../config/mysql.config";
+import { BebidaInterface } from "../interfaces/bebida.interface";
+import TipoBebida from "./tipoBebida.model";
 
 class Bebida extends Model<BebidaInterface> implements Bebida {
   id!: number;
@@ -48,11 +48,16 @@ Bebida.init(
   {
     sequelize,
     modelName: "Bebida",
-    tableName: "bebidas", // Nombre de la tabla en la base de datos
+    tableName: "bebidas",
     timestamps: true,
     createdAt: "fecha_creacion",
     updatedAt: "fecha_actualizacion",
   }
 );
+
+Bebida.belongsTo(TipoBebida, {
+  foreignKey: "tipo",
+  as: "tipoBebida",
+});
 
 export default Bebida;

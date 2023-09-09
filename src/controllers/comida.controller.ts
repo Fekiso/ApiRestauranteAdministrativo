@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { ComidaInterface } from "../interfaces/comida";
+import { ComidaInterface } from "../interfaces/comida.interface";
 import {
   obtenerComidas,
   obtenerComidaPorId,
@@ -10,7 +10,7 @@ import {
   obtenerComidasConFiltros,
   habilitarDeshabilitarComida,
 } from "../services/comida";
-import { RequestExt } from "../interfaces/request";
+import { RequestExt } from "../interfaces/request.interface";
 
 const getComidas = async (req: RequestExt, res: Response) => {
   try {

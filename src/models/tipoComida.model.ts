@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/mysql"; // Importa la conexión a la base de datos
-import { TipoComidaInterface } from "../interfaces/auxiliares";
+import sequelize from "../config/mysql.config";
+import { TipoComidaInterface } from "../interfaces/auxiliares.interface";
 
 class TipoComida extends Model<TipoComidaInterface> implements TipoComida {
   id!: number;
@@ -33,7 +33,7 @@ TipoComida.init(
   {
     sequelize,
     modelName: "TipoComida",
-    tableName: "tipos_comida", // Nombre de la tabla en la base de datos
+    tableName: "tipos_comida",
     timestamps: true,
     createdAt: "fecha_creacion",
     updatedAt: "fecha_actualizacion",
