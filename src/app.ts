@@ -4,7 +4,7 @@ import cors from "cors";
 import swaggerUI from "swagger-ui-express";
 import { router } from "./routes";
 import sequelize from "./config/mysql.config";
-import swaggerSetup from "./config/swagger.config";
+import swaggerSetup from "./docs/swagger.docs";
 
 const PORT = process.env.PORT || null;
 const app = express();
