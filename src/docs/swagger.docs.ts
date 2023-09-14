@@ -35,6 +35,20 @@ const swaggerDefinition: OAS3Definition = {
           TipoBebida: { $ref: "#/components/schemas/TipoBebida" },
         },
       },
+      Carta: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          carta: { type: "integer", example: 1 },
+          promocion: { type: "integer", example: 1 },
+          comida: { type: "integer", example: 1 },
+          bebida: { type: "integer", example: 1 },
+          DetallesCarta: {
+            type: "array",
+            items: { $ref: "#/components/schemas/DetalleCarta" },
+          },
+        },
+      },
       Comida: {
         type: "object",
         properties: {
@@ -49,6 +63,70 @@ const swaggerDefinition: OAS3Definition = {
           precio: { type: "integer", example: 5400.0 },
           habilitado: { type: "boolean", example: true },
           TipoComida: { $ref: "#/components/schemas/TipoComida" },
+        },
+      },
+      DetalleCarta: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          comida: { type: "integer", example: null },
+          bebida: { type: "integer", example: 2 },
+          promocion: { type: "integer", example: null },
+          Comida: { $ref: "#/components/schemas/Comida" },
+          Bebida: { $ref: "#/components/schemas/Bebida" },
+          Promocion: { $ref: "#/components/schemas/Promocion" },
+        },
+      },
+      DetallePromocion: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          promocion: { type: "integer", example: 1 },
+          comida: { type: "integer", example: null },
+          bebida: { type: "integer", example: 2 },
+          cantidad: { type: "integer", example: 2 },
+          Comida: { $ref: "#/components/schemas/Comida" },
+          Bebida: { $ref: "#/components/schemas/Bebida" },
+        },
+      },
+      DetalleFactura: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          factura: { type: "integer", example: 1 },
+          comida: { type: "integer", example: null },
+          bebida: { type: "integer", example: 2 },
+          promocion: { type: "integer", example: null },
+          nombreProducto: {
+            type: "string",
+            example: "Coca",
+          },
+          precio: { type: "integer", example: null },
+          cantidad: { type: "integer", example: null },
+          Comida: { $ref: "#/components/schemas/Comida" },
+          Bebida: { $ref: "#/components/schemas/Bebida" },
+          Promocion: { $ref: "#/components/schemas/Promocion" },
+          Factura: { $ref: "#/components/schemas/Factura" },
+        },
+      },
+      DetallePedido: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          pedido: { type: "integer", example: 1 },
+          comida: { type: "integer", example: null },
+          bebida: { type: "integer", example: 2 },
+          promocion: { type: "integer", example: null },
+          nombreProducto: {
+            type: "string",
+            example: "Coca",
+          },
+          precio: { type: "integer", example: null },
+          cantidad: { type: "integer", example: null },
+          Comida: { $ref: "#/components/schemas/Comida" },
+          Bebida: { $ref: "#/components/schemas/Bebida" },
+          Promocion: { $ref: "#/components/schemas/Promocion" },
+          Pedido: { $ref: "#/components/schemas/Pedido" },
         },
       },
       Empleado: {
@@ -69,11 +147,81 @@ const swaggerDefinition: OAS3Definition = {
           TipoRol: { $ref: "#/components/schemas/TipoRol" },
         },
       },
+      Factura: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          valida: { type: "boolean", example: true },
+          estado: { type: "integer", example: 1 },
+          metodoPago: { type: "integer", example: 1 },
+          mesa: { type: "integer", example: 1 },
+          empleadoAtiende: { type: "integer", example: 1 },
+          empleadoFaturo: { type: "integer", example: 1 },
+          DetallesPedido: {
+            type: "array",
+            items: { $ref: "#/components/schemas/DetallePedido" },
+          },
+          EmpleadoAtiende: { $ref: "#/components/schemas/Empleado" },
+          EmpleadoFacturo: { $ref: "#/components/schemas/Empleado" },
+          EstadoFactura: { $ref: "#/components/schemas/TipoEstadoFactura" },
+          MetodoPago: { $ref: "#/components/schemas/TipoPago" },
+          Mesa: { $ref: "#/components/schemas/Mesa" },
+        },
+      },
+      Mesa: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          ubicacion: { type: "integer", example: 1 },
+        },
+      },
       ErrorHTTP: {
         type: "object",
         properties: {
           code: { type: "integer", description: "Codigo error http", example: 400 },
           message: { type: "string", description: "Descripcion error http", example: "Fekiso" },
+        },
+      },
+      Pedido: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          valida: { type: "boolean", example: true },
+          estado: { type: "integer", example: 1 },
+          mesa: { type: "integer", example: 1 },
+          empleadoAtiende: { type: "integer", example: 1 },
+          DetallesPedido: {
+            type: "array",
+            items: { $ref: "#/components/schemas/DetallePedido" },
+          },
+          EmpleadoAtiende: { $ref: "#/components/schemas/Empleado" },
+          EstadoPedido: { $ref: "#/components/schemas/TipoEstadoPedido" },
+          Mesa: { $ref: "#/components/schemas/Mesa" },
+        },
+      },
+      Promocion: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          nombre: { type: "string", example: "Promocion de prueba" },
+          descripcion: { type: "string", example: "Descripción de la promocion" },
+          precio: { type: "number", example: 10.99 },
+          fechaInicio: { type: "string", example: "2023-08-01" }, // Formato: "YYYY-MM-DD"
+          fechaFin: { type: "string", example: "2023-08-31" }, // Formato: "YYYY-MM-DD"
+          horaInicio: { type: "string", example: "08:00:00" }, // Formato: "HH:MM:SS"
+          horaFin: { type: "string", example: "20:00:00" }, // Formato: "HH:MM:SS"
+          validoLunes: { type: "boolean", example: true },
+          validoMartes: { type: "boolean", example: true },
+          validoMiercoles: { type: "boolean", example: false },
+          validoJueves: { type: "boolean", example: false },
+          validoViernes: { type: "boolean", example: true },
+          validoSabado: { type: "boolean", example: false },
+          validoDomingo: { type: "boolean", example: false },
+          habilitado: { type: "boolean", example: true },
+          DetallesPromocion: {
+            type: "array",
+            items: { $ref: "#/components/schemas/DetallePromocion" },
+          },
         },
       },
       TipoBebida: {
@@ -99,6 +247,33 @@ const swaggerDefinition: OAS3Definition = {
         properties: {
           id: { type: "integer", example: 1 },
           nombre: { type: "string", example: "Documento Unico" },
+          descripcion: { type: "string", example: null },
+          habilitado: { type: "boolean", example: true },
+        },
+      },
+      TipoEstadoFactura: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 3 },
+          nombre: { type: "string", example: "Facturada" },
+          descripcion: { type: "string", example: null },
+          habilitado: { type: "boolean", example: true },
+        },
+      },
+      TipoEstadoPedido: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          nombre: { type: "string", example: "Preparacion" },
+          descripcion: { type: "string", example: null },
+          habilitado: { type: "boolean", example: true },
+        },
+      },
+      TipoPago: {
+        type: "object",
+        properties: {
+          id: { type: "integer", example: 1 },
+          nombre: { type: "string", example: "Efectivo" },
           descripcion: { type: "string", example: null },
           habilitado: { type: "boolean", example: true },
         },
